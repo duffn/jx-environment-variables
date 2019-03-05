@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: draft
-  tag: dev
+  repository: 10.96.188.104:5000/duffn/jx-environment-variables
+  tag: 0.0.1
   pullPolicy: IfNotPresent
 service:
   name: jx-environment-variables
