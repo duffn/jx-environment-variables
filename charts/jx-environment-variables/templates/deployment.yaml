@@ -23,5 +23,13 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
+{{- if .Values.env }}
+        env:
+{{- if hasPrefix "PR-" .Values.branchName }}
+          - name: BRANCH_NAME
+            value: {{ .Values.branchName | quote }}
+{{- else }}
+{{ toYaml .Values.env | indent 10 }}
+{{- end }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
