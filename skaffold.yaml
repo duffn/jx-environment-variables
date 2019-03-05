@@ -1,0 +1,30 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: changeme
+    context: .
+    docker: {}
+  tagPolicy:
+    envTemplate:
+      template: '{{.DOCKER_REGISTRY}}/duffn/jx-environment-variables:{{.VERSION}}'
+  local: {}
+deploy:
+  kubectl: {}
+profiles:
+- name: dev
+  build:
+    artifacts:
+    - docker: {}
+    tagPolicy:
+      envTemplate:
+        template: '{{.DOCKER_REGISTRY}}/duffn/jx-environment-variables:{{.DIGEST_HEX}}'
+    local: {}
+  deploy:
+    helm:
+      releases:
+      - name: jx-environment-variables
+        chartPath: charts/jx-environment-variables
+        setValueTemplates:
+          image.repository: '{{.DOCKER_REGISTRY}}/duffn/jx-environment-variables'
+          image.tag: '{{.DIGEST_HEX}}'
