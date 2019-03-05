@@ -25,7 +25,7 @@ spec:
         - containerPort: {{ .Values.service.internalPort }}
 {{- if .Values.env }}
         env:
-{{- if hasPrefix "PR-" .Values.branchName }}
+{{- if .Values.branchName }}
           - name: BRANCH_NAME
             value: {{ .Values.branchName | quote }}
 {{- else }}
