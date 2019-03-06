@@ -1,3 +1,3 @@
-# python-http
+# jx-environment-variables
 
-Simple Hello World Python HTTP server
+The example repository for [this blog post](https://nicholasduffy.com/posts/jenkins-x-environment-specific-variables/).
